@@ -37,6 +37,12 @@ const optionsArray = [
     buttons: [Length.ALL, Length.LONG, Length.SHORT],
   },
 ];
+const removeName = (name) => {
+  const removedNameArr = generatedNames.value.filter(
+    (filteredName) => filteredName !== name,
+  );
+  generatedNames.value = [...removedNameArr];
+};
 </script>
 <template>
   <div class="container mt-4">
@@ -53,13 +59,12 @@ const optionsArray = [
         Find Names
       </button>
       <div class="mt-3 d-flex justify-content-center" style="gap: 1rem">
-        <button
-          class="btn btn-outline-primary btn-sm"
+        <CardName
           v-for="name in generatedNames"
           :key="name.id"
-        >
-          {{ name }}
-        </button>
+          :name="name"
+          @remove-name="removeName"
+        />
       </div>
     </div>
   </div>
